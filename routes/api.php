@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\Model\Admin;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,3 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/abc',function(){
     dd('123');
 });
+ 
+
+
+
