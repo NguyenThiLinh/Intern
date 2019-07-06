@@ -9,7 +9,7 @@ use App\Model\Admin;
 $factory->define(Admin::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'email' => Str::random(5).'@gmail.com',
+        'email' =>$faker->unique()->email,
         'password'=> Hash::make('admin'),
     ];
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,15 +24,16 @@ class Login extends FormRequest
     public function rules()
     {
         return [
-            'email' =>'required|email',
+            'email' => 'required',
             'password' => 'required'
         ];
     }
+
     public function messages()
     {
-    return [
-        'email.required' => 'Email is required',
-        'password.required'  => 'password is required',
-    ];
+        return [
+            'email.required' => 'Email is required',
+            'password.required'  => 'password is required',
+        ];
     }
 }

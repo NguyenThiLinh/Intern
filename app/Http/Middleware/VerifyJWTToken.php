@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class VerifyJWTToken
 {

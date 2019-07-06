@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use App\Model\Admin;
 
-
-Route::post('adminlogin', 'Admin\LoginController@login');
+Route::post('login', 'Admin\LoginController@login');
  
