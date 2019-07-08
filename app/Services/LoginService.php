@@ -12,10 +12,10 @@ class LoginService
         $credentials = $request->only('email', 'password');
         $token = null;
         
-        if (!$token = auth('admin')->attempt($credentials)) {
+        if (!$token = auth('admins')->attempt($credentials)) {
             throw LoginException::LoginFail();
         }
 
-        return $array = ['toke'=> $token];
+        return  ['toke'=> $token];
     }
 }

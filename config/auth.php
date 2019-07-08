@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'admin',
+        'guard' => 'admins',
         'passwords' => 'users',
     ],
 
@@ -41,12 +41,12 @@ return [
             'provider' => 'users',
         ],
 
-        'user' => [
+        'users' => [
             'driver' => 'jwt',
             'provider' => 'users',
              
         ],
-        'admin'=>[
+        'admins'=>[
             'driver'=>'jwt',
             'provider'=>'admins',
         ],
@@ -107,9 +107,6 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
-        'admin'=>[
-            'provider'=>'admins',
-        ]
     ],
 
 ];
