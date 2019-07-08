@@ -1,6 +1,5 @@
 <?php
 
 return [
-
-    'loginfail' => 'Login fail'
+    'login_failed' => 'Login fail'
 ];

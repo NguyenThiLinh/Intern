@@ -15,7 +15,6 @@ class Login extends FormRequest
     {
         return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -27,7 +26,5 @@ class Login extends FormRequest
             'email' => 'required',
             'password' => 'required'
         ];
-    }
-
-     
+    } 
 }

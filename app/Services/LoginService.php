@@ -10,13 +10,11 @@ class LoginService
     public static function handler(Login $request)
     {
         $credentials = $request->only('email', 'password');
-
         $token = null;
-        
         if (!$token = auth('admin')->attempt($credentials)) {
             throw LoginException::LoginFail();
         }
-        return  $token;
 
+        return  $token;
     }
 }

@@ -8,6 +8,6 @@ class LoginException extends Exception
 {
     public static function LoginFail($code = 400)
     {
-        return new self(__('message.loginfail'), $code);
+        return new self(__('message.login_failed'), $code);
     }
 }
