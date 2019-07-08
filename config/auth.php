@@ -41,7 +41,7 @@ return [
             'provider' => 'users',
         ],
 
-        'api' => [
+        'user' => [
             'driver' => 'jwt',
             'provider' => 'users',
              
@@ -50,10 +50,7 @@ return [
             'driver'=>'jwt',
             'provider'=>'admins',
         ],
-        'admin-api'=>[
-            'driver'=>'jwt',
-            'provider'=>'admins',
-        ],
+       
     ],
 
     /*

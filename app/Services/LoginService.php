@@ -16,6 +16,6 @@ class LoginService
             throw LoginException::LoginFail();
         }
 
-        return  $token;
+        return $array = ['toke'=> $token];
     }
 }
