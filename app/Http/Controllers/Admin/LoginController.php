@@ -13,9 +13,9 @@ class LoginController extends Controller
     {
         $this->adminServices = $adminServices;
     }
-
     public function login(Login $request)
     {
-        return $this->adminServices->validatelogin($request);
+     $data= $this->adminServices->handler($request);
+         return response()->json(['token'=>$data]);
     }
 }
