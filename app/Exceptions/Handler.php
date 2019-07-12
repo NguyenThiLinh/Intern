@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,9 +47,26 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        // dd($exception);
-        // return parent::render($request, $exception);
+       
+         return parent::render($request, $exception);
 
-        return response()->json(['error' => $exception->getMessage()], $exception->getCode());
+        // //  return response()->json(['error' => $exception->getMessage()], $exception->getCode());
+        // $message = 'co loi xay ra';
+        // $code = 400;
+        // switch (true){
+        //     case $exception instanceof AuthorizationException :
+        //         $message = 'You must login';
+        //         $code = 401;
+        //         break;
+        //     case $exception instanceof ModelNotFoundException :
+        //          $message = 'We can not find what you are looking for';
+        //          $code = 404;
+        //          break; 
+        //     default:
+        //         $message  = $exception->getMessage();
+        //         $code = $exception->getCode();
+        //         break ;
+        // }
+        // return response()->json(['error' => $message], $code);
     }
 }
