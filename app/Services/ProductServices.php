@@ -34,7 +34,7 @@ class ProductServices
         'price' => $request->get('price'),
         'id_category' => $request->get('id_category'),
       );
-
+      
       $product = $this->product->create($product);
       return ['message'=>'Add product successfully','data'=>$product]; 
   }

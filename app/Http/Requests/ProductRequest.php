@@ -30,5 +30,4 @@ class ProductRequest extends FormRequest
             'id_category' => 'required',
         ];
     }
-   
 }
