@@ -12,10 +12,9 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {
-        $this->app->register(RepositoryServiceProvider::class);
+    {   
+        $this->app->bind(\App\Repositories\ProductRepository::class, \App\Repositories\ProductRepositoryEloquent::class);   
     }
-
     /**
      * Bootstrap any application services.
      *
@@ -23,6 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        
     }
 }

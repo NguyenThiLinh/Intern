@@ -17,10 +17,9 @@ class Product extends Model
      *
      * @var array
      */
-    protected $table = 'products';
-    protected $fillable = ['name','image','price','detail','id_category'];
+    protected $fillable = ['name','image','price','detail','category_id'];
     
     public function category(){
-        return $this->belongsTo('App\Model\Category','id_category','id');
+        return $this->belongsTo('App\Model\Category','category_id','id');
     }
 }

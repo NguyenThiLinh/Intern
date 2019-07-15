@@ -3,17 +3,17 @@
 namespace App\Services\Products;
 
 use App\Repositories\ProductRepository;
-use App\Http\Requests\ProductRequest;
+use App\Http\Requests\CreateProductRequest;
 use Illuminate\Support\Facades\Storage;
 
-class ProductServices
+class CreateService
 {
   public function __construct(ProductRepository $product)
   {
      $this->product = $product;
   }
 
-  public function create(ProductRequest $request)
+  public function create(CreateProductRequest $request)
   {
       $file = $request->file('image');
       $originalName = $file->getClientOriginalName();
@@ -26,10 +26,10 @@ class ProductServices
         'image' => $file_url,
         'detail' => $request->get('detail'),
         'price' => $request->get('price'),
-        'id_category' => $request->get('id_category'),
+        'category_id' => $request->get('category_id'),
       );
       
       $product = $this->product->create($product);
-      return ['message'=>'Add product successfully','data'=>$product]; 
+      return ['data'=>$product]; 
   }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\ProductRepository;
 use App\Services\Products\CreateService;
-use App\Http\Requests\ProductRequest;
+use App\Http\Requests\CreateProductRequest;
 /**
  * Class ProductsController.
  *
@@ -46,7 +46,7 @@ class ProductsController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(ProductRequest $request)
+    public function store(CreateProductRequest $request)
     {
         return $this->createServices->create($request);
     }
