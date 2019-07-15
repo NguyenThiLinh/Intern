@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\ProductRepository;
-use App\Services\ProductServices;
+use App\Services\Products\CreateService;
 use App\Http\Requests\ProductRequest;
 /**
  * Class ProductsController.
@@ -15,28 +15,28 @@ class ProductsController extends Controller
     /**
      * @var ProductRepository
      */
-    protected $productServices;
+    protected $createServices;
     /**
      * ProductsController constructor.
      *
      * @param ProductRepository $repository
      * @param ProductValidator $validator
      */
-    public function __construct(ProductServices $productServices )
+    public function __construct(CreateService $createServices )
     {
-        $this->productServices = $productServices;  
+        $this->createServices = $createServices;  
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {  
-        $products = $this->productServices->index();
+    // public function index()
+    // {  
+    //     $products = $this->createServices->index();
 
-        return response()->json($products);
-    } 
+    //     return response()->json($products);
+    // } 
     /**
      * Store a newly created resource in storage.
      *
@@ -48,6 +48,6 @@ class ProductsController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        return $this->productServices->create($request);
+        return $this->createServices->create($request);
     }
 }
