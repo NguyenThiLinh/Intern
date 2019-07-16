@@ -18,7 +18,7 @@ class Products extends JsonResource
             'id',
             'name' ,
             'price',
-            'image' ,
+            'image_url' ,
             'detail',
             'category_id',
             'created_at',

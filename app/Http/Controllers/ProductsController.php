@@ -32,7 +32,6 @@ class ProductsController extends Controller
     {
         $product = $this->createServices->create($request);
          
-        return response()->json(new ProductResource($product));
-        
+        return response()->json(new ProductResource($product));  
     }   
 }
