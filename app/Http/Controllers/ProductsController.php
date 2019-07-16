@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\Products\CreateService;
 use App\Http\Requests\CreateProductRequest;
+use App\Http\Resources\Products as ProductResource;
+ 
 /**
  * Class ProductsController.
  *
@@ -28,6 +30,9 @@ class ProductsController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-        return $this->createServices->create($request);
-    }
+        $product = $this->createServices->create($request);
+         
+        return response()->json(new ProductResource($product));
+        
+    }   
 }

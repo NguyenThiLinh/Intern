@@ -30,6 +30,7 @@ class CreateService
       );
       
       $product = $this->productRepository->create($product);
-      return ['data'=>$product]; 
+      
+      return $product; 
   }
 }
