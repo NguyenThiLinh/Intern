@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -23,8 +22,6 @@ class Admin extends Model implements JWTSubject , Authenticatable
     }
     public function getJWTCustomClaims()
     {
-        return [
-            
-        ];
+        return [];
     }
 }

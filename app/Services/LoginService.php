@@ -15,7 +15,6 @@ class LoginService
         if (!$token = auth('admins')->attempt($credentials)) {
             throw LoginException::LoginFail();
         }
-
-        return  ['toke'=> $token];
+        return  ['token'=> $token];
     }
 }
