@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Services\Products\CreateService;
+use App\Services\Products\ListService;
 use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\ListProductRequest;
 use App\Http\Resources\Products as ProductResource;
  
 /**
@@ -13,11 +15,13 @@ use App\Http\Resources\Products as ProductResource;
  */
 class ProductsController extends Controller
 {
-    protected $createServices;
+    protected $createService;
+    protected $listService;
      
-    public function __construct(CreateService $createServices )
+    public function __construct(CreateService $createService,ListService $listService)
     {
-        $this->createServices = $createServices;  
+        $this->createService = $createService;  
+        $this->listService = $listService;
     }
     /**
      * Store a newly created resource in storage.
@@ -30,8 +34,15 @@ class ProductsController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-        $product = $this->createServices->create($request);
+        $product = $this->createService->create($request);
          
         return response()->json(new ProductResource($product));  
-    }   
+    } 
+    
+    public function index(ListProductRequest $request)
+    {  
+        $products = $this->listService->index($request);
+
+        return response()->json(ProductResource::collection($products));
+    } 
 }
