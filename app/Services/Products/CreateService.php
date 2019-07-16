@@ -2,15 +2,15 @@
 
 namespace App\Services\Products;
 
-use App\Repositories\ProductRepository;
+use App\Repositories\ProductRepositoryEloquent;
 use App\Http\Requests\CreateProductRequest;
 use Illuminate\Support\Facades\Storage;
 
 class CreateService
 {
-  public function __construct(ProductRepository $product)
+  public function __construct(ProductRepositoryEloquent $productRepository)
   {
-     $this->product = $product;
+     $this->productRepository = $productRepository;
   }
 
   public function create(CreateProductRequest $request)
@@ -29,7 +29,7 @@ class CreateService
         'category_id' => $request->get('category_id'),
       );
       
-      $product = $this->product->create($product);
+      $product = $this->productRepository->create($product);
       return ['data'=>$product]; 
   }
 }

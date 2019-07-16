@@ -3,14 +3,13 @@
 namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
-use App\Repositories\ProductRepository;
 use App\Model\Product;
 /**
  * Class ProductRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
+class ProductRepositoryEloquent extends BaseRepository  
 {
     /**
      * Specify Model class name
