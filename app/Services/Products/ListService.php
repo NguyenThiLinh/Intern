@@ -4,7 +4,7 @@ namespace App\Services\Products;
 
 use App\Repositories\ProductRepositoryEloquent;
 use App\Http\Requests\ListProductRequest;
-
+ 
 class ListService
 {
 	public function __construct(ProductRepositoryEloquent $productRepository)
@@ -35,6 +35,6 @@ class ListService
 			return $query;
 		});
 
-		return $this->productRepository->paginate(8);
+		 return $this->productRepository;	 
 	}
 }

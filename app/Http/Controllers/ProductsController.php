@@ -6,8 +6,9 @@ use App\Services\Products\CreateService;
 use App\Services\Products\ListService;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\ListProductRequest;
-use App\Http\Resources\Products as ProductResource;
- 
+use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductCollection;
+
 /**
  * Class ProductsController.
  *
@@ -42,7 +43,7 @@ class ProductsController extends Controller
     public function index(ListProductRequest $request)
     {  
         $products = $this->listService->index($request);
-
-        return response()->json(ProductResource::collection($products));
+        
+        return response()->json(new ProductCollection($products->paginate()));
     } 
 }
