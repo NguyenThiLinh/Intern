@@ -7,14 +7,14 @@ use App\Http\Requests\ListProductRequest;
 
 class ListService
 {
-	public function __construct(ProductRepositoryEloquent $product)
+	public function __construct(ProductRepositoryEloquent $productRepository)
 	{
-		$this->product = $product;
+		$this->productRepository = $productRepository;
 	}
 
 	public function index(ListProductRequest $request)
 	{
-		$this->product->scopeQuery(function ($query) use ($request) {
+		$this->productRepository->scopeQuery(function ($query) use ($request) {
 
 			if ($request->has('name')) {
 				$query =  $query->where('name', 'like', "%{$request->name}%");
@@ -35,6 +35,6 @@ class ListService
 			return $query;
 		});
 
-		return $this->product->all();
+		return $this->productRepository->all();
 	}
 }
