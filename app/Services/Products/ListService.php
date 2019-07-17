@@ -35,6 +35,6 @@ class ListService
 			return $query;
 		});
 
-		return $this->productRepository->all();
+		return $this->productRepository->paginate(8);
 	}
 }
