@@ -33,7 +33,6 @@ class ListService
 			}
 			
 			if($request->has('order')){
-				dd($request->order);
 				$query = $query->orderBy('name','asc');
 			}
 
