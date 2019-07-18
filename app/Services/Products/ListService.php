@@ -30,11 +30,16 @@ class ListService
             
 			if ($request->has('price_max')) {
 				$query = $query->where('price', '<=', $request->price_max);
-            }
-            
+			}
+			
+			if($request->has('order')){
+				dd($request->order);
+				$query = $query->orderBy('name','asc');
+			}
+
 			return $query;
 		});
 
-		 return $this->productRepository;	 
+		 return $this->productRepository ;	 
 	}
 }
