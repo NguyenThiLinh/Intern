@@ -15,7 +15,7 @@ class LoginController extends Controller
     }
     public function login(Login $request)
     {
-         $data= $this->adminServices->handler($request);
+         $data= $this->adminServices->handler($request,'admins');
 
          return response()->json($data);
     }
