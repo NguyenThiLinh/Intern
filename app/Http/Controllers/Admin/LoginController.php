@@ -9,6 +9,7 @@ use App\Http\Requests\Login;
 class LoginController extends Controller
 {
     protected  $adminServices;
+    
     public function __construct(LoginService $adminServices)
     {
         $this->adminServices = $adminServices;

@@ -16,6 +16,7 @@ class LoginService
         if (!$token = auth($guard)->attempt($credentials)) {
             throw LoginException::LoginFail();
         }
+        
         return  ['token'=> $token];
     }
 }
