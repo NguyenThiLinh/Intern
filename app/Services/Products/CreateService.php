@@ -3,7 +3,6 @@
 namespace App\Services\Products;
 
 use App\Repositories\ProductRepositoryEloquent;
-use App\Http\Requests\CreateProductRequest;
 use Illuminate\Support\Facades\Storage;
 
 class CreateService
@@ -13,7 +12,7 @@ class CreateService
      $this->productRepository = $productRepository;
   }
 
-  public function create(CreateProductRequest $request)
+  public function create($request)
   {
       $file = $request->file('image');
       $originalName = $file->getClientOriginalName();
