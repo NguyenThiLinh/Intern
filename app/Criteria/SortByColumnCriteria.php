@@ -33,17 +33,14 @@ class SortByColumnCriteria implements CriteriaInterface
     {
         $orders = explode(",", $this->input);
        
-        foreach($orders as $order)
+        foreach($orders as $value)
         {
-            $orders = explode(".", $order);
+            $orders = explode(".", $value);
            
-            if(count($orders) == 2)
-            {
-                if( in_array($orders[0], $this->allowedColumns) && in_array($orders[1], ['asc','desc']))
-                { 
-                    $model = $model->orderBy($orders[0], $orders[1]);
-                }		
-            }
+            if(count($orders) == 2 && in_array($orders[0], $this->allowedColumns) && in_array($orders[1], ['asc','desc']))
+             { 
+                 $model = $model->orderBy($orders[0], $orders[1]);
+             }		   
         }
 
         return $model;    

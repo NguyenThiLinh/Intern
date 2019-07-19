@@ -5,10 +5,12 @@ namespace App\Services\Products;
 use App\Repositories\ProductRepositoryEloquent;
 use App\Http\Requests\ListProductRequest;
 use App\Criteria\SortByColumnCriteria;
+use Illuminate\Database\Eloquent\Collection;
 
 class ListService
 {
-	public function __construct(ProductRepositoryEloquent $productRepository)
+	 
+	public function __construct(ProductRepositoryEloquent $productRepository )
 	{
 		$this->productRepository = $productRepository;
 	}
@@ -38,6 +40,11 @@ class ListService
 			return $query;
 		});
 		 
-		 return $this->productRepository ;	 
+		if($request->has('number_per_page'))
+		{
+			return $this->productRepository->paginate($request->number_per_page);
+		}
+		
+		return  $this->productRepository->all();	 
 	}
 }

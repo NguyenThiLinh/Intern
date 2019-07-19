@@ -44,6 +44,6 @@ class ProductsController extends Controller
     {  
         $products = $this->listService->index($request);
         
-        return response()->json(new ProductCollection($products->paginate()));
+        return response()->json(new ProductCollection($products));
     } 
 }
