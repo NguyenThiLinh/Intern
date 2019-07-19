@@ -28,6 +28,7 @@ class ListProductRequest extends FormRequest
             'category_id' => 'integer|exists:categories,id',
             'price_min' => 'integer|min:0',
             'price_max' => 'integer|min:0',
+            'per_page' => 'integer',
         ];
     }
 }

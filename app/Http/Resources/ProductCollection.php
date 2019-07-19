@@ -25,6 +25,7 @@ class ProductCollection extends ResourceCollection
                 'last_page' => $this->lastPage()
             ];
          }
+         
          return [
            'data' => ProductResource::collection($this->collection),
         ];

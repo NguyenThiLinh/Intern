@@ -40,11 +40,11 @@ class ListService
 			return $query;
 		});
 		 
-		if($request->has('number_per_page'))
+		if($request->has('per_page'))
 		{
-			return $this->productRepository->paginate($request->number_per_page);
+			return $this->productRepository->paginate($request->per_page);
 		}
-		
+
 		return  $this->productRepository->all();	 
 	}
 }

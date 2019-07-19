@@ -38,9 +38,9 @@ class SortByColumnCriteria implements CriteriaInterface
             $orders = explode(".", $value);
            
             if(count($orders) == 2 && in_array($orders[0], $this->allowedColumns) && in_array($orders[1], ['asc','desc']))
-             { 
-                 $model = $model->orderBy($orders[0], $orders[1]);
-             }		   
+            { 
+                $model = $model->orderBy($orders[0], $orders[1]);
+            }		   
         }
 
         return $model;    
