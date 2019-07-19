@@ -37,4 +37,9 @@ class Product extends Model
     public function getImageUrlAttribute(){
         return array_random($this->url);
     }
+
+    public function orders(){
+        
+        return $this->belongsToMany('App\Model\Order','order_items','product_id','order_id');
+    }
 }
