@@ -22,8 +22,8 @@ class CreateOrdersTable extends Migration
             $table->string('customer_email');
             $table->string('customer_address');
             $table->double('total');
-            $table->dateTime('delivery_at');
-            $table->dateTime('canceled_at');
+            $table->dateTime('delivery_at')->nullable();
+            $table->dateTime('canceled_at')->nullable();
             $table->timestamps();
         });
     }
