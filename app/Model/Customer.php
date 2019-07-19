@@ -3,9 +3,14 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Customer extends Model
-{
+class Customer extends Model implements JWTSubject , Authenticatable
+{  
+    use AuthenticableTrait;
+
     protected $fillable = ['name','email','password','phone','address'];
    
     public $timestamps = true;
@@ -14,4 +19,13 @@ class Customer extends Model
         return $this->hasMany('App\Model\Order','customer_id','id');
     }
 
+     public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
