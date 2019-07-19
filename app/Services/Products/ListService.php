@@ -4,7 +4,8 @@ namespace App\Services\Products;
 
 use App\Repositories\ProductRepositoryEloquent;
 use App\Http\Requests\ListProductRequest;
- 
+use App\Criteria\SortByColumnCriteria;
+
 class ListService
 {
 	public function __construct(ProductRepositoryEloquent $productRepository)
@@ -14,6 +15,8 @@ class ListService
 
 	public function index(ListProductRequest $request)
 	{
+		$this->productRepository->pushCriteria(new SortByColumnCriteria($request->order,['name','price']));
+ 
 		$this->productRepository->scopeQuery(function ($query) use ($request) {
 
 			if ($request->has('name')) {
@@ -31,14 +34,10 @@ class ListService
 			if ($request->has('price_max')) {
 				$query = $query->where('price', '<=', $request->price_max);
 			}
-			
-			if($request->has('order')){
-				$query = $query->orderBy('name','asc');
-			}
 
 			return $query;
 		});
-
+		 
 		 return $this->productRepository ;	 
 	}
 }
