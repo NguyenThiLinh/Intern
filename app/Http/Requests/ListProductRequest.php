@@ -24,11 +24,10 @@ class ListProductRequest extends FormRequest
     public function rules()
     {
         return [
-           // 'name' => 'exists:products',
             'category_id' => 'integer|exists:categories,id',
             'price_min' => 'integer|min:0',
             'price_max' => 'integer|min:0',
-            'per_page' => 'integer',
+            'per_page' => 'integer|min:1',
         ];
     }
 }

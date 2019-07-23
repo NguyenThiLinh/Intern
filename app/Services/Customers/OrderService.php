@@ -27,9 +27,17 @@ class OrderService
         {
             $id = $product['id'];
             $quantity = $product['quantity'];
-            $b = Product::find($id);
-            $total = $b->price*$quantity;
-            $order->products()->attach($id,[ 'quantity' => $quantity,'amount' => $total]);  
-        }   
+            $product = Product::find($id);
+            $total = $product->price*$quantity;
+            $now = now();
+
+            $order->products()->attach($id, [
+                'quantity' => $quantity,
+                'amount' => $total,
+                'updated_at' => $now,
+                'created_at' => $now
+                ]); 
+        } 
+        return $order;  
     }   
 }
