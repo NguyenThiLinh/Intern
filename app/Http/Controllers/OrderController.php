@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use App\Services\Customers\OrderService;
-use Illuminate\Http\Request;
+use App\Http\Requests\OrderRequest;
 
 class OrderController extends Controller
 {
@@ -15,7 +15,7 @@ class OrderController extends Controller
         $this->orderService = $orderService;
     }
 
-    public function order(Request $request)
+    public function order (OrderRequest $request)
     {
         $order = $this->orderService->handler($request);
 
