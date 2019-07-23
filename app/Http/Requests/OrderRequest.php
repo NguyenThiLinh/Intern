@@ -30,7 +30,7 @@ class OrderRequest extends FormRequest
                 'min:0',
                 Rule::exists('products')->whereNull('deleted_at')
             ],
-            'products.*.quantity' => 'required|integer|min:0',
+            'products.*.quantity' => 'required|integer|min:1',
         ];
     }
 }

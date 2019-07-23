@@ -22,13 +22,13 @@ class OrderService
             'customer_address'=> $request->user()->address,
         ];
         $order =  $this->orderRepository->create($data); 
-        
+          
         foreach($request->products  as $product )
         {
             $id = $product['id'];
             $quantity = $product['quantity'];
             $product = Product::find($id);
-            $total = $product->price*$quantity;
+            $total = $product->price * $quantity;
             $now = now();
 
             $order->products()->attach($id, [
@@ -37,7 +37,10 @@ class OrderService
                 'updated_at' => $now,
                 'created_at' => $now
                 ]); 
-        } 
+        }
+        
+        $sum = $product->sum('amount');
+         
         return $order;  
     }   
 }
