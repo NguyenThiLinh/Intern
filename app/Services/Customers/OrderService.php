@@ -4,7 +4,9 @@ namespace App\Services\Customers;
 
 use App\Repositories\OrderRepository;
 use App\Model\Product;
- 
+use Illuminate\Support\Facades\DB;
+use App\Model\Order;
+
 class OrderService 
 {
     public function __construct(OrderRepository $orderRepository)
@@ -22,7 +24,8 @@ class OrderService
             'customer_address'=> $request->user()->address,
         ];
         $order =  $this->orderRepository->create($data); 
-          
+        $totalMoney = 0;
+        
         foreach($request->products  as $product )
         {
             $id = $product['id'];
@@ -30,17 +33,17 @@ class OrderService
             $product = Product::find($id);
             $total = $product->price * $quantity;
             $now = now();
+            $totalMoney += $total;
 
             $order->products()->attach($id, [
                 'quantity' => $quantity,
                 'amount' => $total,
                 'updated_at' => $now,
                 'created_at' => $now
-                ]); 
+                ]);     
         }
+        DB::table('orders')->where('id',$order->id)->update(['total'=> $totalMoney]);
         
-        $sum = $product->sum('amount');
-         
-        return $order;  
+        return $order->find($order->id);  
     }   
 }
