@@ -5,8 +5,7 @@ namespace App\Services\Customers;
 use App\Repositories\OrderRepository;
 use App\Model\Product;
 use Illuminate\Support\Facades\DB;
-use App\Model\Order;
-
+ 
 class OrderService 
 {
     public function __construct(OrderRepository $orderRepository)
@@ -26,10 +25,25 @@ class OrderService
         $order =  $this->orderRepository->create($data); 
         $totalMoney = 0;
         
+        //dd($request->products);
+
+        $arrayId = array_column($request->products,'id');
+        //dd($arrayId);
+        $product = DB::table('products')->whereIn('id',$arrayId)->get();
+        dd($product);
+
+        // $arrayQuantity = array_column($request->products,'quantity');
+        // dd($arrayQuantity);
+
+        $collection = collect($request->products);
+        //dd( $collection);
+        $quantity= $collection->where('quantity');
+        
+
         foreach($request->products  as $product )
         {
             $id = $product['id'];
-            $quantity = $product['quantity'];
+            $quantity = $product['quantity'];  
             $product = Product::find($id);
             $total = $product->price * $quantity;
             $now = now();
@@ -42,8 +56,9 @@ class OrderService
                 'created_at' => $now
                 ]);     
         }
-        DB::table('orders')->where('id',$order->id)->update(['total'=> $totalMoney]);
+            $order->total = $totalMoney;
+            $order->save();
         
-        return $order->find($order->id);  
+        return $order;  
     }   
 }
