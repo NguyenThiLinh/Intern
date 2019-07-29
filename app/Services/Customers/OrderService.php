@@ -4,9 +4,7 @@ namespace App\Services\Customers;
 
 use App\Repositories\OrderRepository;
 use App\Model\Product;
-use Illuminate\Support\Facades\DB;
 use App\Model\OrderItem;
-use App\Model\Order;
 
 class OrderService 
 {
@@ -26,10 +24,7 @@ class OrderService
         ];
         $totalMoney = 0;
         $arrayId = array_column($request->products,'id');
-        //dd($arrayId);
-       // $product = DB::table('products')->whereIn('id',$arrayId)->get();
         $collections = Product::whereIn('id',$arrayId)->get();
-        //dd($product);
         
         $data = array();
 
@@ -48,7 +43,6 @@ class OrderService
             $totalMoney += $amount;
 
             $object = array(
-               //'order_id'=>$order->id,
                 'product_id'=>$c->id,
                 'quantity' => $quantity,
                 'amount' => $amount,
@@ -57,27 +51,17 @@ class OrderService
             );
             array_push($data,$object); 
         }
-       // dd($totalMoney);
-       //dd($data);
+        
         $customer['total'] = $totalMoney;
-    
-        $order =  $this->orderRepository->create($customer); 
-        //dd($order);
-
+        $order =  $this->orderRepository->create($customer);
         $orderItems = [];
+
         foreach($data as $orderItem) {
             $orderItem['order_id'] = $order->id;
             $orderItems[] = $orderItem;
         }
-         dd($orderItems);
 
         OrderItem::insert($orderItems);
-    
-        // $data = array_map(function($orderItem) use ($order){
-        //     $orderItem['order_id']= $order->id;
-        //     return $orderItem;
-        // },$data);
-        // dd($data);
-        return $order;  
+            return $order;  
     }   
 }
