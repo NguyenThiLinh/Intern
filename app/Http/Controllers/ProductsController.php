@@ -62,24 +62,4 @@ class ProductsController extends Controller
         return response()->json(new ProductCollection($products));
     } 
 
-    public function update(UpdateProductRequest $request,$id)
-    {
-        $product = $this->updateService->update($request,$id);
-
-        return response()->json(new ProductResource($product));
-    }
-    
-    public function destroy($id)
-    {
-        $product = $this->deleteService->delete($id);
-
-        return response()->json('Product deleted');
-    }
-
-    public function show($id)
-    {
-        $product = $this->showService->show($id);
-
-        return response()->json(new ProductResource($product)); 
-    }
 }

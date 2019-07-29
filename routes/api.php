@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::post('login', 'Customer\CustomerController@login');
-Route::get('products/{id}','ProductsController@show');
+ 
  
  
 
