@@ -8,3 +8,7 @@ Route::group([ 'middleware'=>'auth:admins'], function(){
 });
 
 Route::get('products','ProductsController@index'); 
+Route::post('products/update/{id}','ProductsController@update');
+Route::delete('products/delete/{id}','ProductsController@destroy');
+
+
