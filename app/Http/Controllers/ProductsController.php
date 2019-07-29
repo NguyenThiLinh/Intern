@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\Products\CreateService;
 use App\Services\Products\ListService;
 use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\ListProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductCollection;
