@@ -5,7 +5,9 @@ namespace App\Services\Customers;
 use App\Repositories\OrderRepository;
 use App\Model\Product;
 use Illuminate\Support\Facades\DB;
- 
+use App\Model\OrderItem;
+use App\Model\Order;
+
 class OrderService 
 {
     public function __construct(OrderRepository $orderRepository)
@@ -15,50 +17,67 @@ class OrderService
 
     public function handler($request)
     {
-        $data = [
+        $customer = [
             'customer_id' => $request->user()->id,
             'customer_name' => $request->user()->name,
             'customer_phone' => $request->user()->phone,
             'customer_email'=> $request->user()->email,
             'customer_address'=> $request->user()->address,
         ];
-        $order =  $this->orderRepository->create($data); 
         $totalMoney = 0;
-        
-        //dd($request->products);
-
         $arrayId = array_column($request->products,'id');
         //dd($arrayId);
-        $product = DB::table('products')->whereIn('id',$arrayId)->get();
-        dd($product);
-
-        // $arrayQuantity = array_column($request->products,'quantity');
-        // dd($arrayQuantity);
-
-        $collection = collect($request->products);
-        //dd( $collection);
-        $quantity= $collection->where('quantity');
+       // $product = DB::table('products')->whereIn('id',$arrayId)->get();
+        $collections = Product::whereIn('id',$arrayId)->get();
+        //dd($product);
         
+        $data = array();
 
-        foreach($request->products  as $product )
+        foreach($collections as $c )
         {
-            $id = $product['id'];
-            $quantity = $product['quantity'];  
-            $product = Product::find($id);
-            $total = $product->price * $quantity;
-            $now = now();
-            $totalMoney += $total;
+            foreach($request->products as $product)
+            {
+                if($c->id ==$product['id'])
+                {
+                    $quantity = $product['quantity']; 
+                }
+                $amount = $c->price*$quantity;
+                $now = now();
+                
+            }   
+            $totalMoney += $amount;
 
-            $order->products()->attach($id, [
+            $object = array(
+               //'order_id'=>$order->id,
+                'product_id'=>$c->id,
                 'quantity' => $quantity,
-                'amount' => $total,
+                'amount' => $amount,
                 'updated_at' => $now,
-                'created_at' => $now
-                ]);     
+                'created_at' => $now,
+            );
+            array_push($data,$object); 
         }
-            $order->total = $totalMoney;
-            $order->save();
-        
+       // dd($totalMoney);
+       //dd($data);
+        $customer['total'] = $totalMoney;
+    
+        $order =  $this->orderRepository->create($customer); 
+        //dd($order);
+
+        $orderItems = [];
+        foreach($data as $orderItem) {
+            $orderItem['order_id'] = $order->id;
+            $orderItems[] = $orderItem;
+        }
+         dd($orderItems);
+
+        OrderItem::insert($orderItems);
+    
+        // $data = array_map(function($orderItem) use ($order){
+        //     $orderItem['order_id']= $order->id;
+        //     return $orderItem;
+        // },$data);
+        // dd($data);
         return $order;  
     }   
 }
