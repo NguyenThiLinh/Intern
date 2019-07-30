@@ -70,7 +70,8 @@ class ProductsController extends Controller
 
     public function destroy($id)
     {
-        $product = $this->deleteService->delete($id);
+        // $product = $this->deleteService->delete($id);
+        $product= $this->deleteService->soflDelete($id);
 
         return response()->json('Product deleted');
     }
