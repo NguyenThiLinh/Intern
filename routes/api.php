@@ -15,8 +15,10 @@ use Illuminate\Http\Request;
 
 Route::post('login', 'Customer\CustomerController@login');
 
+//Route::post('order','OrderController@order');
  
- 
-
+Route::group([ 'middleware'=>'auth:users'], function(){
+    Route::post('order','OrderController@order');   
+});
 
 

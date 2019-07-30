@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
-class ListProductRequest extends FormRequest
+use Illuminate\Validation\Rule;
+ 
+class OrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +25,12 @@ class ListProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => 'integer|exists:categories,id',
-            'price_min' => 'integer|min:0',
-            'price_max' => 'integer|min:0',
-            'per_page' => 'integer|min:1',
+            'products.*.id' =>
+            [   'integer',
+                'min:0',
+                Rule::exists('products')->whereNull('deleted_at')
+            ],
+            'products.*.quantity' => 'required|integer|min:1',
         ];
     }
 }
