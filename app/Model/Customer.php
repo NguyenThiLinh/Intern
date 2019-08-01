@@ -28,4 +28,9 @@ class Customer extends Model implements JWTSubject , Authenticatable
     {
         return [];
     }
+
+    public function products()
+    {
+        return $this->belongsToMany('App\Model\Product','favorite_product','customer_id','product_id');
+    }
 }

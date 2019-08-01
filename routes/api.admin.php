@@ -8,3 +8,6 @@ Route::group([ 'middleware'=>'auth:admins'], function(){
 });
 
 Route::get('products','ProductsController@index'); 
+
+
+

@@ -8,6 +8,10 @@ use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\ListProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductCollection;
+use App\Services\Products\LikeService;
+use Illuminate\Http\Request;
+use App\Http\Requests\FavoriteProductRequest;
+use App\Services\Products\ListRecommendsService;
 
 /**
  * Class ProductsController.
@@ -18,11 +22,19 @@ class ProductsController extends Controller
 {
     protected $createService;
     protected $listService;
-     
-    public function __construct(CreateService $createService,ListService $listService)
+    protected $likeService;
+    protected $listRecommendService;
+    
+    public function __construct(
+        CreateService $createService,
+        ListService $listService,
+        LikeService $likeService,
+        ListRecommendsService $listRecommendService)
     {
         $this->createService = $createService;  
         $this->listService = $listService;
+        $this->likeService = $likeService;
+        $this->listRecommendService = $listRecommendService;
     }
     /**
      * Store a newly created resource in storage.
@@ -46,4 +58,19 @@ class ProductsController extends Controller
         
         return response()->json(new ProductCollection($products));
     } 
+
+    public function favorite(FavoriteProductRequest $request)
+    {
+        $product = $this->likeService->favorite($request);
+       
+        return response()->json($product);
+    }
+
+    public function  recommends(Request $request)
+    {
+        $product = $this->listRecommendService->listRecommends($request);
+        
+        return response()->json(new ProductCollection($product));
+    }
+
 }
