@@ -42,4 +42,8 @@ class Product extends Model
         
         return $this->belongsToMany('App\Model\Order','order_items','product_id','order_id');
     }
+
+    public function customers(){
+        return $this->belongsToMany('App\Model\Customer','favorite_product','product_id','customer_id');
+    }
 }

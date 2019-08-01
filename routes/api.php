@@ -14,8 +14,12 @@ use Illuminate\Http\Request;
 */
 
 Route::post('login', 'Customer\CustomerController@login');
- 
- 
+
+Route::group([ 'middleware'=>'auth:users'], function(){
+    Route::post('like','ProductsController@favorite');   
+});
+
+ROute::get('listRecommend','ProductsController@recommends');
  
 
 
